@@ -3,8 +3,9 @@ import classes from './PostsList.module.css';
 
 function Postslist (){
     return (
-        <div class="p-7">
+        <div className="p-7 flex">
             <Post author="Nicolò" body="Guarda mamma come scoreggio"/>
+            <Post author="Marco" body="Guarda mamma come scoreggio pure io"/>
         </div>
       );
 }
