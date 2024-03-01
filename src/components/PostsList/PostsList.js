@@ -1,31 +1,49 @@
-import Post from '../Post/Post';
-import { useState } from 'react';
-import InputPost from '../InputPost/InputPost';
+import Post from "../Post/Post";
+import { useState } from "react";
+import InputPost from "../InputPost/InputPost";
+import Modal from "../Modal/Modal";
 
-function Postslist (){
+function Postslist({ isPosting, onStopPosting }) {
+  const [enteredBody, setEnteredBody] = useState("");
+  const [enteredName, setEnteredName] = useState("");
 
-    const [enteredBody, setEnteredBody] = useState('');
-    const [enteredName, setEnteredName] = useState('');
+  function bodyChangeHandler(event) {
+    setEnteredBody(event.target.value);
+  }
 
-    function bodyChangeHandler(event){
-        setEnteredBody(event.target.value)
-    }
+  function authorChangeHadler(event) {
+    setEnteredName(event.target.value);
+  }
 
-    function nameChangeHadler(event){
-        setEnteredName(event.target.value)
-    }
+  //   let modalContent;
 
-    return (
-        <div>
-            <h1 className='text-6xl font-mono mt-10 tracking-wide text-purple-300'>POST BOARD</h1>
-            <p className="text-xl mt-3 font-medium tracking-wider font-mono text-fuchsia-300">Write your personal memory and hang them here !</p>
-            <InputPost onBodyChange={bodyChangeHandler} onNameChange={nameChangeHadler}/>
-            <div className="p-7 pt-0 flex flex-wrap">
-                <Post author={enteredName} body={enteredBody}/>
-                <Post author="Marco" body="Guarda mamma come scoreggio pure io"/>
-            </div>
+  //   modalContent = (
+  //     <Modal onClose={onStopPosting}>
+  //       <InputPost
+  //         onBodyChange={bodyChangeHandler}
+  //         onAuthorChange={authorChangeHadler}
+  //       />
+  //     </Modal>
+  //   );
+
+  return (
+    <>
+      <div class="mt-20">
+        {isPosting && (
+          <Modal onClose={onStopPosting}>
+            <InputPost
+              onBodyChange={bodyChangeHandler}
+              onAuthorChange={authorChangeHadler}
+            />
+          </Modal>
+        )}
+        <div className="p-7 pt-0 flex flex-wrap">
+          <Post author={enteredName} body={enteredBody} />
+          <Post author="Marco" body="Guarda mamma come mi diverto" />
         </div>
-      );
+      </div>
+    </>
+  );
 }
 
 export default Postslist;
